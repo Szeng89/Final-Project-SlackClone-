@@ -1,0 +1,27 @@
+{
+  "slackCloneTempApp": {
+    "mention": {
+      "home": {
+        "title": "Mentions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Mention",
+        "createOrEditLabel": "Create or edit a Mention",
+        "notFound": "No Mentions found"
+      },
+      "created": "A new Mention is created with identifier {{ param }}",
+      "updated": "A Mention is updated with identifier {{ param }}",
+      "deleted": "A Mention is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Mention {{ id }}?"
+      },
+      "detail": {
+        "title": "Mention"
+      },
+      "id": "ID",
+      "userName": "User Name",
+      "body": "Body",
+      "userProfile": "User Profile",
+      "message": "Message"
+    }
+  }
+}

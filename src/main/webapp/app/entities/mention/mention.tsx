@@ -66,14 +66,16 @@ export const Mention = () => {
   return (
     <div>
       <h2 id="mention-heading" data-cy="MentionHeading">
-        Mentions
+        <Translate contentKey="slackCloneTempApp.mention.home.title">Mentions</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="slackCloneTempApp.mention.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/mention/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Mention
+            &nbsp;
+            <Translate contentKey="slackCloneTempApp.mention.home.createLabel">Create new Mention</Translate>
           </Link>
         </div>
       </h2>
@@ -83,13 +85,19 @@ export const Mention = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="slackCloneTempApp.mention.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('userName')}>
-                  User Name <FontAwesomeIcon icon={getSortIconByFieldName('userName')} />
+                  <Translate contentKey="slackCloneTempApp.mention.userName">User Name</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('userName')} />
                 </th>
-                <th className="hand" onClick={sort('text')}>
-                  Text <FontAwesomeIcon icon={getSortIconByFieldName('text')} />
+                <th className="hand" onClick={sort('body')}>
+                  <Translate contentKey="slackCloneTempApp.mention.body">Body</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('body')} />
+                </th>
+                <th>
+                  <Translate contentKey="slackCloneTempApp.mention.userProfile">User Profile</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -103,14 +111,21 @@ export const Mention = () => {
                     </Button>
                   </td>
                   <td>{mention.userName}</td>
-                  <td>{mention.text}</td>
+                  <td>{mention.body}</td>
+                  <td>{mention.userProfile ? <Link to={`/user-profile/${mention.userProfile.id}`}>{mention.userProfile.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/mention/${mention.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button tag={Link} to={`/mention/${mention.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() => (window.location.href = `/mention/${mention.id}/delete`)}
@@ -118,7 +133,10 @@ export const Mention = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -127,7 +145,11 @@ export const Mention = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Mentions found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="slackCloneTempApp.mention.home.notFound">No Mentions found</Translate>
+            </div>
+          )
         )}
       </div>
     </div>

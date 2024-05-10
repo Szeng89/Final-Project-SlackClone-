@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity UserProfile.
+    -->
+    <changeSet id="20240510184015-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_profile"
+                                 constraintName="fk_user_profile__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="user_profile_id"
+                                 baseTableName="rel_user_profile__workspaces"
+                                 constraintName="fk_rel_user_profile__workspaces__user_profile_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_profile"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="workspaces_id"
+                                 baseTableName="rel_user_profile__workspaces"
+                                 constraintName="fk_rel_user_profile__workspaces__workspaces_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workspace"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="user_profile_id"
+                                 baseTableName="rel_user_profile__channels"
+                                 constraintName="fk_rel_user_profile__channels__user_profile_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_profile"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="channels_id"
+                                 baseTableName="rel_user_profile__channels"
+                                 constraintName="fk_rel_user_profile__channels__channels_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="channel"
+                                 />
+    </changeSet>
+</databaseChangeLog>

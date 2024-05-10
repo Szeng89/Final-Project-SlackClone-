@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240501180646"
+    "changelogDate": "20240510184018"
   },
   "applications": "*",
   "fields": [
@@ -29,9 +29,9 @@
     {
       "otherEntityName": "userProfile",
       "otherEntityRelationshipName": "messages",
-      "relationshipName": "sender",
+      "relationshipName": "userProfile",
       "relationshipSide": "right",
-      "relationshipType": "one-to-many"
+      "relationshipType": "many-to-one"
     },
     {
       "otherEntityName": "channel",

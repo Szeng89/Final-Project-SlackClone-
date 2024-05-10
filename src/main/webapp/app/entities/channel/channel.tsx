@@ -66,14 +66,16 @@ export const Channel = () => {
   return (
     <div>
       <h2 id="channel-heading" data-cy="ChannelHeading">
-        Channels
+        <Translate contentKey="slackCloneTempApp.channel.home.title">Channels</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="slackCloneTempApp.channel.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/channel/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Channel
+            &nbsp;
+            <Translate contentKey="slackCloneTempApp.channel.home.createLabel">Create new Channel</Translate>
           </Link>
         </div>
       </h2>
@@ -83,19 +85,25 @@ export const Channel = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="slackCloneTempApp.channel.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('name')}>
-                  Name <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
+                  <Translate contentKey="slackCloneTempApp.channel.name">Name</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
                 </th>
                 <th className="hand" onClick={sort('description')}>
-                  Description <FontAwesomeIcon icon={getSortIconByFieldName('description')} />
+                  <Translate contentKey="slackCloneTempApp.channel.description">Description</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('description')} />
                 </th>
                 <th>
-                  Messages <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="slackCloneTempApp.channel.workspace">Workspace</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  Members <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="slackCloneTempApp.channel.messages">Messages</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="slackCloneTempApp.channel.members">Members</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -110,6 +118,7 @@ export const Channel = () => {
                   </td>
                   <td>{channel.name}</td>
                   <td>{channel.description}</td>
+                  <td>{channel.workspace ? <Link to={`/workspace/${channel.workspace.id}`}>{channel.workspace.id}</Link> : ''}</td>
                   <td>{channel.messages ? <Link to={`/message/${channel.messages.id}`}>{channel.messages.id}</Link> : ''}</td>
                   <td>
                     {channel.members
@@ -124,10 +133,16 @@ export const Channel = () => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/channel/${channel.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button tag={Link} to={`/channel/${channel.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() => (window.location.href = `/channel/${channel.id}/delete`)}
@@ -135,7 +150,10 @@ export const Channel = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -144,7 +162,11 @@ export const Channel = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Channels found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="slackCloneTempApp.channel.home.notFound">No Channels found</Translate>
+            </div>
+          )
         )}
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import {} from 'react-jhipster';
+import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -21,23 +21,39 @@ export const ChannelDetail = () => {
   return (
     <Row>
       <Col md="8">
-        <h2 data-cy="channelDetailsHeading">Channel</h2>
+        <h2 data-cy="channelDetailsHeading">
+          <Translate contentKey="slackCloneTempApp.channel.detail.title">Channel</Translate>
+        </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="id">ID</span>
+            <span id="id">
+              <Translate contentKey="global.field.id">ID</Translate>
+            </span>
           </dt>
           <dd>{channelEntity.id}</dd>
           <dt>
-            <span id="name">Name</span>
+            <span id="name">
+              <Translate contentKey="slackCloneTempApp.channel.name">Name</Translate>
+            </span>
           </dt>
           <dd>{channelEntity.name}</dd>
           <dt>
-            <span id="description">Description</span>
+            <span id="description">
+              <Translate contentKey="slackCloneTempApp.channel.description">Description</Translate>
+            </span>
           </dt>
           <dd>{channelEntity.description}</dd>
-          <dt>Messages</dt>
+          <dt>
+            <Translate contentKey="slackCloneTempApp.channel.workspace">Workspace</Translate>
+          </dt>
+          <dd>{channelEntity.workspace ? channelEntity.workspace.id : ''}</dd>
+          <dt>
+            <Translate contentKey="slackCloneTempApp.channel.messages">Messages</Translate>
+          </dt>
           <dd>{channelEntity.messages ? channelEntity.messages.id : ''}</dd>
-          <dt>Members</dt>
+          <dt>
+            <Translate contentKey="slackCloneTempApp.channel.members">Members</Translate>
+          </dt>
           <dd>
             {channelEntity.members
               ? channelEntity.members.map((val, i) => (
@@ -50,11 +66,17 @@ export const ChannelDetail = () => {
           </dd>
         </dl>
         <Button tag={Link} to="/channel" replace color="info" data-cy="entityDetailsBackButton">
-          <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>
+          <FontAwesomeIcon icon="arrow-left" />{' '}
+          <span className="d-none d-md-inline">
+            <Translate contentKey="entity.action.back">Back</Translate>
+          </span>
         </Button>
         &nbsp;
         <Button tag={Link} to={`/channel/${channelEntity.id}/edit`} replace color="primary">
-          <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+          <FontAwesomeIcon icon="pencil-alt" />{' '}
+          <span className="d-none d-md-inline">
+            <Translate contentKey="entity.action.edit">Edit</Translate>
+          </span>
         </Button>
       </Col>
     </Row>

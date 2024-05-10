@@ -1,27 +1,18 @@
 // Users Profile entity
 entity UserProfile {
-  name String required,
-  email String required,
-  timezone Integer,
-  phone Integer
-}
-// Workspace entity
-entity Workspace {
-  name String required,
+  fullName String,
+  timezone String,
+  phone String,
   status String
-}
-// Many-to-Many relationship between Workspace and UserProfile for Members
-relationship ManyToMany {
-  UserProfile{workspaces} to Workspace{members}
 }
 // Channels entity
 entity Channel {
   name String required,
   description String
 }
-// Many-to-Many relationship between Channel and UserProfile for Members
-relationship ManyToMany {
-  UserProfile{channels} to Channel{members}
+// Workspace entity
+entity Workspace {
+  name String required
 }
 // Messages entity
 entity Message {
@@ -29,20 +20,43 @@ entity Message {
   pinned Integer,
   timestamp Integer
 }
-// Many-to-One relationship between Message and UserProfile for sender
-relationship ManyToOne {
-  UserProfile{messages} to Message{sender}
+// Mentions entity
+entity Mention {
+  userName String required,
+  body String required
 }
+
+relationship OneToOne {
+     UserProfile{user(login)} to User{userProfile} with builtInEntity
+}
+
+// Many-to-Many relationship between Workspace and UserProfile for Members
+relationship ManyToMany {
+  UserProfile{workspaces} to Workspace{members}
+}
+
+// Many-to-One relationship between Workspace and Channel for Members
+relationship ManyToOne {
+  Channel{workspace} to Workspace{channels}
+}
+
+// Many-to-Many relationship between Channel and UserProfile for Members
+relationship ManyToMany {
+  UserProfile{channels} to Channel{members}
+}
+
 // Many-to-One relationship between Message and Channel for channel
 relationship ManyToOne {
   Channel{messages} to Message{channel}
 }
-// Mentions entity
-entity Mention {
-  userName String required,
-  text String required
-}
+
 // Many-to-One relationship between Mention and Message
 relationship ManyToOne {
   Message{mentions} to Mention{message}
+}
+
+// Many-to-One relationship between Message and UserProfile for userProfile
+relationship OneToMany {
+UserProfile{messages} to Message{userProfile},
+UserProfile{mention} to Mention{userProfile}
 }

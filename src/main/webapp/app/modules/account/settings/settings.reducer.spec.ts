@@ -1,10 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import axios from 'axios';
 import sinon from 'sinon';
+import { TranslatorContext } from 'react-jhipster';
 
 import account, { updateAccount, reset } from './settings.reducer';
 
 describe('Settings reducer tests', () => {
+  beforeAll(() => {
+    TranslatorContext.registerTranslations('en', {});
+  });
+
   describe('Common tests', () => {
     it('should return the initial state', () => {
       const toTest = account(undefined, { type: '' });

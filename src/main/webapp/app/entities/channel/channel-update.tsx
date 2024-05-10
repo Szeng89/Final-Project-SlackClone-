@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { IWorkspace } from 'app/shared/model/workspace.model';
+import { getEntities as getWorkspaces } from 'app/entities/workspace/workspace.reducer';
 import { IMessage } from 'app/shared/model/message.model';
 import { getEntities as getMessages } from 'app/entities/message/message.reducer';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
@@ -23,6 +25,7 @@ export const ChannelUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const workspaces = useAppSelector(state => state.workspace.entities);
   const messages = useAppSelector(state => state.message.entities);
   const userProfiles = useAppSelector(state => state.userProfile.entities);
   const channelEntity = useAppSelector(state => state.channel.entity);
@@ -41,6 +44,7 @@ export const ChannelUpdate = () => {
       dispatch(getEntity(id));
     }
 
+    dispatch(getWorkspaces({}));
     dispatch(getMessages({}));
     dispatch(getUserProfiles({}));
   }, []);
@@ -60,6 +64,7 @@ export const ChannelUpdate = () => {
     const entity = {
       ...channelEntity,
       ...values,
+      workspace: workspaces.find(it => it.id.toString() === values.workspace?.toString()),
       messages: messages.find(it => it.id.toString() === values.messages?.toString()),
       members: mapIdList(values.members),
     };
@@ -76,6 +81,7 @@ export const ChannelUpdate = () => {
       ? {}
       : {
           ...channelEntity,
+          workspace: channelEntity?.workspace?.id,
           messages: channelEntity?.messages?.id,
           members: channelEntity?.members?.map(e => e.id.toString()),
         };
@@ -84,8 +90,8 @@ export const ChannelUpdate = () => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="tableTalkApp.channel.home.createOrEditLabel" data-cy="ChannelCreateUpdateHeading">
-            Create or edit a Channel
+          <h2 id="slackCloneTempApp.channel.home.createOrEditLabel" data-cy="ChannelCreateUpdateHeading">
+            <Translate contentKey="slackCloneTempApp.channel.home.createOrEditLabel">Create or edit a Channel</Translate>
           </h2>
         </Col>
       </Row>
@@ -95,19 +101,56 @@ export const ChannelUpdate = () => {
             <p>Loading...</p>
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
-              {!isNew ? <ValidatedField name="id" required readOnly id="channel-id" label="ID" validate={{ required: true }} /> : null}
+              {!isNew ? (
+                <ValidatedField
+                  name="id"
+                  required
+                  readOnly
+                  id="channel-id"
+                  label={translate('global.field.id')}
+                  validate={{ required: true }}
+                />
+              ) : null}
               <ValidatedField
-                label="Name"
+                label={translate('slackCloneTempApp.channel.name')}
                 id="channel-name"
                 name="name"
                 data-cy="name"
                 type="text"
                 validate={{
-                  required: { value: true, message: 'This field is required.' },
+                  required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
-              <ValidatedField label="Description" id="channel-description" name="description" data-cy="description" type="text" />
-              <ValidatedField id="channel-messages" name="messages" data-cy="messages" label="Messages" type="select">
+              <ValidatedField
+                label={translate('slackCloneTempApp.channel.description')}
+                id="channel-description"
+                name="description"
+                data-cy="description"
+                type="text"
+              />
+              <ValidatedField
+                id="channel-workspace"
+                name="workspace"
+                data-cy="workspace"
+                label={translate('slackCloneTempApp.channel.workspace')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {workspaces
+                  ? workspaces.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="channel-messages"
+                name="messages"
+                data-cy="messages"
+                label={translate('slackCloneTempApp.channel.messages')}
+                type="select"
+              >
                 <option value="" key="0" />
                 {messages
                   ? messages.map(otherEntity => (
@@ -117,7 +160,14 @@ export const ChannelUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
-              <ValidatedField label="Members" id="channel-members" data-cy="members" type="select" multiple name="members">
+              <ValidatedField
+                label={translate('slackCloneTempApp.channel.members')}
+                id="channel-members"
+                data-cy="members"
+                type="select"
+                multiple
+                name="members"
+              >
                 <option value="" key="0" />
                 {userProfiles
                   ? userProfiles.map(otherEntity => (
@@ -130,12 +180,15 @@ export const ChannelUpdate = () => {
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/channel" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                <span className="d-none d-md-inline">
+                  <Translate contentKey="entity.action.back">Back</Translate>
+                </span>
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                &nbsp;
+                <Translate contentKey="entity.action.save">Save</Translate>
               </Button>
             </ValidatedForm>
           )}

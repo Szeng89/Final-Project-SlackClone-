@@ -11,8 +11,8 @@
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:file:./target/h2db/testdb/tabletalk;DB_CLOSE_DELAY=-1;MODE=MYSQL
-    username: TableTalk
+    url: jdbc:h2:file:./target/h2db/testdb/slackclonetemp;DB_CLOSE_DELAY=-1;MODE=MYSQL
+    username: slackCloneTemp
     password:
     hikari:
       auto-commit: false

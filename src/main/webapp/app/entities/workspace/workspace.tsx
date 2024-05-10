@@ -66,14 +66,16 @@ export const Workspace = () => {
   return (
     <div>
       <h2 id="workspace-heading" data-cy="WorkspaceHeading">
-        Workspaces
+        <Translate contentKey="slackCloneTempApp.workspace.home.title">Workspaces</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="slackCloneTempApp.workspace.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/workspace/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Workspace
+            &nbsp;
+            <Translate contentKey="slackCloneTempApp.workspace.home.createLabel">Create new Workspace</Translate>
           </Link>
         </div>
       </h2>
@@ -83,16 +85,15 @@ export const Workspace = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="slackCloneTempApp.workspace.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('name')}>
-                  Name <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
-                </th>
-                <th className="hand" onClick={sort('status')}>
-                  Status <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
+                  <Translate contentKey="slackCloneTempApp.workspace.name">Name</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
                 </th>
                 <th>
-                  Members <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="slackCloneTempApp.workspace.members">Members</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -106,7 +107,6 @@ export const Workspace = () => {
                     </Button>
                   </td>
                   <td>{workspace.name}</td>
-                  <td>{workspace.status}</td>
                   <td>
                     {workspace.members
                       ? workspace.members.map((val, j) => (
@@ -120,10 +120,16 @@ export const Workspace = () => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/workspace/${workspace.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button tag={Link} to={`/workspace/${workspace.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() => (window.location.href = `/workspace/${workspace.id}/delete`)}
@@ -131,7 +137,10 @@ export const Workspace = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -140,7 +149,11 @@ export const Workspace = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Workspaces found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="slackCloneTempApp.workspace.home.notFound">No Workspaces found</Translate>
+            </div>
+          )
         )}
       </div>
     </div>

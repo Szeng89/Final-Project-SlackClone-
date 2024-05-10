@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240501180645"
+    "changelogDate": "20240510184016"
   },
   "applications": "*",
   "fields": [
@@ -16,6 +16,13 @@
   ],
   "name": "Channel",
   "relationships": [
+    {
+      "otherEntityName": "workspace",
+      "otherEntityRelationshipName": "channels",
+      "relationshipName": "workspace",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
     {
       "otherEntityName": "message",
       "otherEntityRelationshipName": "channel",

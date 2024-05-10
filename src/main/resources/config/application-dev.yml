@@ -18,7 +18,7 @@ logging:
     ROOT: DEBUG
     tech.jhipster: DEBUG
     org.hibernate.SQL: DEBUG
-    rocks.zipcode: DEBUG
+    com.mycompany.myapp: DEBUG
 
 spring:
   devtools:
@@ -32,8 +32,8 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:file:./target/h2db/db/TableTalk;DB_CLOSE_DELAY=-1;MODE=MYSQL
-    username: TableTalk
+    url: jdbc:h2:file:./target/h2db/db/slackCloneTemp;DB_CLOSE_DELAY=-1;MODE=MYSQL
+    username: slackCloneTemp
     password:
     hikari:
       poolName: Hikari
@@ -84,7 +84,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: YWUzMjU0MWVjOTQxNzFjOTE4NzBiYzM3ZjUyYjA3OTFiNGQ0MjcyZDQ2ODhiZmQ0OTZlMTMxNDdkMmU1NzIxYzkwNDdjZjU1NGI1MjM1ODgwNTY0NWE1YWUxYjdlZjE5MTMxYzBhNWM5ODFhN2EyMDllYjUzMjU1ZDBlMjNkYTM=
+        base64-secret: Yjc3NGRhOTIzYTA2ZDA4NGJlODhkOWEzOWU2ZjU2YWI3N2Y5YjY0Nzk0ZTM5NDZhNjhjMDg1MzM2MTBmZDUzNWQ0NWMzMzA2ZDA3YjRmNmI3Mzk5NDYyNWEwMzMzZmUzMWVlYWFkYzdhMTIzNGMyOWM1YTU5NzQxYjJkM2IyMzY=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

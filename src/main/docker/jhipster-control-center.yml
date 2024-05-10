@@ -28,7 +28,7 @@
 # - In Consul mode, the ports are in the consul.yml file.
 # - In Eureka mode, the ports are in the jhipster-registry.yml file.
 
-name: tabletalk
+name: slackclonetemp
 services:
   jhipster-control-center:
     image: 'jhipster/jhipster-control-center:v0.5.0'
@@ -42,8 +42,8 @@ services:
       - SPRING_PROFILES_ACTIVE=prod,api-docs,static
       - SPRING_SECURITY_USER_PASSWORD=admin
       # The token should have the same value than the one declared in you Spring configuration under the jhipster.security.authentication.jwt.base64-secret configuration's entry
-      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=YWUzMjU0MWVjOTQxNzFjOTE4NzBiYzM3ZjUyYjA3OTFiNGQ0MjcyZDQ2ODhiZmQ0OTZlMTMxNDdkMmU1NzIxYzkwNDdjZjU1NGI1MjM1ODgwNTY0NWE1YWUxYjdlZjE5MTMxYzBhNWM5ODFhN2EyMDllYjUzMjU1ZDBlMjNkYTM=
-      - SPRING_CLOUD_DISCOVERY_CLIENT_SIMPLE_INSTANCES_TABLETALK_0_URI=http://host.docker.internal:8080
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=Yjc3NGRhOTIzYTA2ZDA4NGJlODhkOWEzOWU2ZjU2YWI3N2Y5YjY0Nzk0ZTM5NDZhNjhjMDg1MzM2MTBmZDUzNWQ0NWMzMzA2ZDA3YjRmNmI3Mzk5NDYyNWEwMzMzZmUzMWVlYWFkYzdhMTIzNGMyOWM1YTU5NzQxYjJkM2IyMzY=
+      - SPRING_CLOUD_DISCOVERY_CLIENT_SIMPLE_INSTANCES_SLACKCLONETEMP_0_URI=http://host.docker.internal:8080
       - LOGGING_FILE_NAME=/tmp/jhipster-control-center.log
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix

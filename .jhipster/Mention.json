@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240501180647"
+    "changelogDate": "20240510184019"
   },
   "applications": "*",
   "fields": [
@@ -10,13 +10,20 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "text",
+      "fieldName": "body",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
     }
   ],
   "name": "Mention",
   "relationships": [
+    {
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "mention",
+      "relationshipName": "userProfile",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
     {
       "otherEntityName": "message",
       "otherEntityRelationshipName": "mentions",

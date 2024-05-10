@@ -1,36 +1,50 @@
 {
   "annotations": {
-    "changelogDate": "20240501180643"
+    "changelogDate": "20240510184015"
   },
   "applications": "*",
   "fields": [
     {
-      "fieldName": "name",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "email",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
+      "fieldName": "fullName",
+      "fieldType": "String"
     },
     {
       "fieldName": "timezone",
-      "fieldType": "Integer"
+      "fieldType": "String"
     },
     {
       "fieldName": "phone",
-      "fieldType": "Integer"
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
     }
   ],
   "name": "UserProfile",
   "relationships": [
     {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "userProfile",
+      "relationshipName": "user",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipWithBuiltInEntity": true
+    },
+    {
       "otherEntityName": "message",
-      "otherEntityRelationshipName": "sender",
+      "otherEntityRelationshipName": "userProfile",
       "relationshipName": "messages",
       "relationshipSide": "left",
-      "relationshipType": "many-to-one"
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "mention",
+      "otherEntityRelationshipName": "userProfile",
+      "relationshipName": "mention",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
     },
     {
       "otherEntityName": "workspace",

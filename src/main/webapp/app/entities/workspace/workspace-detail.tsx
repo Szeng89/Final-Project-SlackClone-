@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import {} from 'react-jhipster';
+import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -21,21 +21,25 @@ export const WorkspaceDetail = () => {
   return (
     <Row>
       <Col md="8">
-        <h2 data-cy="workspaceDetailsHeading">Workspace</h2>
+        <h2 data-cy="workspaceDetailsHeading">
+          <Translate contentKey="slackCloneTempApp.workspace.detail.title">Workspace</Translate>
+        </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="id">ID</span>
+            <span id="id">
+              <Translate contentKey="global.field.id">ID</Translate>
+            </span>
           </dt>
           <dd>{workspaceEntity.id}</dd>
           <dt>
-            <span id="name">Name</span>
+            <span id="name">
+              <Translate contentKey="slackCloneTempApp.workspace.name">Name</Translate>
+            </span>
           </dt>
           <dd>{workspaceEntity.name}</dd>
           <dt>
-            <span id="status">Status</span>
+            <Translate contentKey="slackCloneTempApp.workspace.members">Members</Translate>
           </dt>
-          <dd>{workspaceEntity.status}</dd>
-          <dt>Members</dt>
           <dd>
             {workspaceEntity.members
               ? workspaceEntity.members.map((val, i) => (
@@ -48,11 +52,17 @@ export const WorkspaceDetail = () => {
           </dd>
         </dl>
         <Button tag={Link} to="/workspace" replace color="info" data-cy="entityDetailsBackButton">
-          <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>
+          <FontAwesomeIcon icon="arrow-left" />{' '}
+          <span className="d-none d-md-inline">
+            <Translate contentKey="entity.action.back">Back</Translate>
+          </span>
         </Button>
         &nbsp;
         <Button tag={Link} to={`/workspace/${workspaceEntity.id}/edit`} replace color="primary">
-          <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+          <FontAwesomeIcon icon="pencil-alt" />{' '}
+          <span className="d-none d-md-inline">
+            <Translate contentKey="entity.action.edit">Edit</Translate>
+          </span>
         </Button>
       </Col>
     </Row>
