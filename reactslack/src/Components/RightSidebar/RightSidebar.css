@@ -56,8 +56,8 @@
   /* Style your right sidebar here */
   background-color: #72d5e2;
   padding: 1rem;
-  border-left: 1px solid #72d5e2;
-  width: 150px;
+  border-left: 1px solid #fff;
+  width: 200px;
   height: 100vh;
   position: fixed;
   right: 0;

@@ -70,6 +70,8 @@
 
 /* sidebar.css */
 
+/* sidebar.css */
+
 .sidebar {
   width: 250px;
   background-color: #72d5e2;
@@ -121,4 +123,30 @@
 
 .add-channel button:hover {
   background-color: #0056b3;
+}
+
+/* Delete button style */
+.sidebar ul li button,
+.add-channel button {
+  background-color: #2b1996;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.sidebar ul li button:hover,
+.add-channel button:hover {
+  background-color: #2b1996;
+}
+
+/* Channel link style */
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+  text-decoration: underline;
 }
